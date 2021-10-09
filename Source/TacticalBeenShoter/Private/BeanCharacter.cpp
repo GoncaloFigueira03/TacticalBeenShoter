@@ -29,6 +29,19 @@ void ABeanCharacter::Tick(float DeltaTime)
 void ABeanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ABeanCharacter::MoveForward);
+	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ABeanCharacter::MoveRight);
 
+	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ABeanCharacter::AddControllerYawInput);
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ABeanCharacter::AddControllerPitchInput);
 }
 
+void ABeanCharacter::MoveForward(float AxisVal)
+{
+	AddMovementInput(GetActorForwardVector() * AxisVal);
+}
+
+void ABeanCharacter::MoveRight(float AxisVal)
+{
+	AddMovementInput(GetActorRightVector() * AxisVal);
+}
