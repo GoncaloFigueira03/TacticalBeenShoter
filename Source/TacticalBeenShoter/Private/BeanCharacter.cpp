@@ -34,6 +34,9 @@ void ABeanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ABeanCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ABeanCharacter::AddControllerPitchInput);
+
+	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ABeanCharacter::Jump);
+
 }
 
 void ABeanCharacter::MoveForward(float AxisVal)
