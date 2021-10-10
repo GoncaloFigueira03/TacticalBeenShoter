@@ -25,8 +25,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 		
-	UPROPERTY()
-		float secondJumpHeight;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float JumpHeight;
 
 protected:
 
@@ -36,6 +36,8 @@ protected:
 	void DoubleJump();
 	int DoubleJumpCounter;
 
+	virtual void Landed(const FHitResult& Hit) override;
+	
 	//Crouch Start Stop Function
 	void StartCrouch();
 	void StopCrouch();

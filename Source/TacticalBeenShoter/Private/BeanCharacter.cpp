@@ -24,7 +24,8 @@ ABeanCharacter::ABeanCharacter()
 	// Set Default Braking Friction Factor
 	BrakingFrictionFactor = 1.0f;
 
-	secondJumpHeight = 600.f;
+	// Jumping/Double jumping variables
+	JumpHeight = 600.f;
 	DoubleJumpCounter=0;
 }
 
@@ -39,7 +40,6 @@ void ABeanCharacter::BeginPlay()
 void ABeanCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -126,11 +126,17 @@ void ABeanCharacter::StopCrouch()
 
 	isCrouching = false;
 }
+
+void ABeanCharacter::Landed(const FHitResult& Hit)
+{
+	DoubleJumpCounter = 0;
+}
+
 void ABeanCharacter::DoubleJump()
 {
 	if(DoubleJumpCounter <= 1)
 	{
-		ACharacter::LaunchCharacter(FVector(0,0,secondJumpHeight), false, true);
-		//DoubleJumpCounter++;
+		ACharacter::LaunchCharacter(FVector(0,0,JumpHeight), false, true);
+		DoubleJumpCounter++;
 	}
 }
