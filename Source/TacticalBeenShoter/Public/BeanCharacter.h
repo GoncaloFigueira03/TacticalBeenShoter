@@ -28,7 +28,28 @@ public:
 
 protected:
 
+	//Move Right or Forward Funcion
 	void MoveForward(float AxisVal);
 	void MoveRight(float AxisVal);
 
+	//Crouch Start Stop Function
+	void StartCrouch();
+	void StopCrouch();
+
+	//Determines if player is crouching
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	bool isCrouching;
+
+	//Determines if player is sprinting
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	bool isSprinting;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float MaxWalkSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float BaseTurnRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float BaseLookUpRate;
 };
