@@ -21,6 +21,9 @@ ABeanCharacter::ABeanCharacter()
 	// Set Default Max Speeds
 	MaxWalkSpeed = 600.0f;
 
+	// Set Default Braking Friction Factor
+	BrakingFrictionFactor = 1.0f;
+
 	secondJumpHeight = 600.f;
 	DoubleJumpCounter=0;
 }
@@ -43,6 +46,7 @@ void ABeanCharacter::Tick(float DeltaTime)
 void ABeanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ABeanCharacter::MoveForward);
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ABeanCharacter::MoveRight);
 
@@ -56,6 +60,9 @@ void ABeanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction(TEXT("Sprint"), IE_Pressed, this, &ABeanCharacter::StartSprint);
 	PlayerInputComponent->BindAction(TEXT("Sprint"), IE_Released, this, &ABeanCharacter::StopSprint);
+
+	PlayerInputComponent->BindAction(TEXT("Slide"), IE_Pressed, this, &ABeanCharacter::StartSlide);
+	PlayerInputComponent->BindAction(TEXT("Slide"), IE_Released, this, &ABeanCharacter::StopSlide);
 
 }
 
@@ -83,6 +90,22 @@ void ABeanCharacter::StopSprint()
 
 	isSprinting = false;
 
+}
+
+void ABeanCharacter::StartSlide()
+{
+	GetCharacterMovement()->BrakingFrictionFactor = 0.1f;
+	GetCharacterMovement()->BrakingDecelerationWalking = 1.0f;
+
+	isSliding = true;
+}
+
+void ABeanCharacter::StopSlide()
+{
+	GetCharacterMovement()->BrakingFrictionFactor = 1.0f;
+	GetCharacterMovement()->BrakingDecelerationWalking = 1.0f;
+
+	isSliding = false;
 }
 
 

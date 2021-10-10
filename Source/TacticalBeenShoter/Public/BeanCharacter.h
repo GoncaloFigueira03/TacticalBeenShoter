@@ -1,5 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -31,13 +30,11 @@ public:
 
 protected:
 
-	//Move Right or Forward Funcion
+	// Move Right or Forward Funcion
 	void MoveForward(float AxisVal);
 	void MoveRight(float AxisVal);
 	void DoubleJump();
 	int DoubleJumpCounter;
-	
-
 
 	//Crouch Start Stop Function
 	void StartCrouch();
@@ -47,13 +44,21 @@ protected:
 	void StartSprint();
 	void StopSprint();
 
-	//Determines if player is crouching
+	// Start Stop Sliding
+	void StartSlide();
+	void StopSlide();
+
+	// Determines if player is crouching
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool isCrouching;
 
-	//Determines if player is sprinting
+	// Determines if player is sprinting
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool isSprinting;
+
+	// Determines if player is sliding
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float isSliding;
 
 	// Calling Max Walk Speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
@@ -65,4 +70,13 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	float BaseLookUpRate;
+
+
+	// Setting the slidability of the player SKRRRRRRR
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float BrakingFrictionFactor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float BrakingDecelerationWalkingl;
+
 };
