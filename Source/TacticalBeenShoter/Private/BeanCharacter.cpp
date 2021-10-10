@@ -95,7 +95,8 @@ void ABeanCharacter::StopSprint()
 void ABeanCharacter::StartSlide()
 {
 	GetCharacterMovement()->BrakingFrictionFactor = 0.1f;
-	GetCharacterMovement()->BrakingDecelerationWalking = 1.0f;
+	GetCharacterMovement()->BrakingDecelerationWalking = 0.1f;
+	ABeanCharacter::StartCrouch();
 
 	isSliding = true;
 }
@@ -104,6 +105,7 @@ void ABeanCharacter::StopSlide()
 {
 	GetCharacterMovement()->BrakingFrictionFactor = 1.0f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 1.0f;
+	ABeanCharacter::StopCrouch();
 
 	isSliding = false;
 }
