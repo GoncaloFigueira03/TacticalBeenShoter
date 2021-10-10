@@ -36,6 +36,10 @@ protected:
 	void StartCrouch();
 	void StopCrouch();
 
+	// Start Stop Sprint
+	void StartSprint();
+	void StopSprint();
+
 	//Determines if player is crouching
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool isCrouching;
@@ -44,9 +48,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool isSprinting;
 
+	// Calling Max Walk Speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	float MaxWalkSpeed;
 
+	// Setting up base turn rates
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	float BaseTurnRate;
 

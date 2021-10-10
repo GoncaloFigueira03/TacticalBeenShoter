@@ -48,8 +48,12 @@ void ABeanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ABeanCharacter::AddControllerPitchInput);
 
 	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ABeanCharacter::Jump);
+
 	PlayerInputComponent->BindAction(TEXT("Crouch"), IE_Pressed, this, &ABeanCharacter::StartCrouch);
 	PlayerInputComponent->BindAction(TEXT("Crouch"), IE_Released, this, &ABeanCharacter::StopCrouch);
+
+	PlayerInputComponent->BindAction(TEXT("Sprint"), IE_Pressed, this, &ABeanCharacter::StartSprint);
+	PlayerInputComponent->BindAction(TEXT("Sprint"), IE_Released, this, &ABeanCharacter::StopSprint);
 
 }
 
@@ -62,6 +66,23 @@ void ABeanCharacter::MoveRight(float AxisVal)
 {
 	AddMovementInput(GetActorRightVector() * AxisVal);
 }
+
+void ABeanCharacter::StartSprint()
+{
+	GetCharacterMovement()->MaxWalkSpeed = 900.0f;
+
+	isSprinting = true;
+
+}
+
+void ABeanCharacter::StopSprint()
+{
+	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
+
+	isSprinting = false;
+
+}
+
 
 void ABeanCharacter::StartCrouch()
 {
