@@ -21,6 +21,8 @@ ABeanCharacter::ABeanCharacter()
 	// Set Default Max Speeds
 	MaxWalkSpeed = 600.0f;
 
+	secondJumpHeight = 600.f;
+	DoubleJumpCounter=0;
 }
 
 // Called when the game starts or when spawned
@@ -47,7 +49,7 @@ void ABeanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ABeanCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ABeanCharacter::AddControllerPitchInput);
 
-	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ABeanCharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ABeanCharacter::DoubleJump);
 
 	PlayerInputComponent->BindAction(TEXT("Crouch"), IE_Pressed, this, &ABeanCharacter::StartCrouch);
 	PlayerInputComponent->BindAction(TEXT("Crouch"), IE_Released, this, &ABeanCharacter::StopCrouch);
@@ -100,4 +102,12 @@ void ABeanCharacter::StopCrouch()
 	ABeanCharacter::UnCrouch();
 
 	isCrouching = false;
+}
+void ABeanCharacter::DoubleJump()
+{
+	if(DoubleJumpCounter <= 1)
+	{
+		ACharacter::LaunchCharacter(FVector(0,0,secondJumpHeight), false, true);
+		//DoubleJumpCounter++;
+	}
 }

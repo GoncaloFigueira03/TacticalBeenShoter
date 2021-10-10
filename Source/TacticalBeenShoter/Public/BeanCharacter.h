@@ -25,12 +25,19 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+		
+	UPROPERTY()
+		float secondJumpHeight;
 
 protected:
 
 	//Move Right or Forward Funcion
 	void MoveForward(float AxisVal);
 	void MoveRight(float AxisVal);
+	void DoubleJump();
+	int DoubleJumpCounter;
+	
+
 
 	//Crouch Start Stop Function
 	void StartCrouch();
